@@ -36,7 +36,7 @@ const TasksList = () => {
                                 className="mx-3"
                                 onClick={() => updateTask()}
                             >
-                                <i class="bi bi-pencil-fill"></i>
+                                <i className="bi bi-pencil-fill"></i>
                             </Button>
                             <Button variant="primary">
                                 <i className="bi bi-trash3" onClick={() => deleteTask()}></i>
