@@ -10,8 +10,10 @@ const tasksSlice = createSlice({
     initialState,
     reducers: {
         addTaskToList: (state, action) => {
+            console.log("Action: ", action);
             const id = nanoid();
             let task = { ...action.payload, id };  /* action consists of payload and type. Using Object spreading */
+            console.log(task);
             state.tasksList.push(task);
         },
         removefromList: (state, action) => {

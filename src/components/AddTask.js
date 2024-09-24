@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-
+import { addTaskToList } from "../slice/tasksSlice";
+import { useDispatch } from "react-redux"
 const AddTask = () => {
-
+    const dispatch = useDispatch();
 
 
     const [title, setTitle] = useState('')
@@ -13,6 +14,7 @@ const AddTask = () => {
     const addTask = (e) => {
         e.preventDefault()
         console.log({ title, description })
+        dispatch(addTaskToList({ title, description }));
     }
     return (
         <section className="my-5">
@@ -29,7 +31,7 @@ const AddTask = () => {
                         onChange={(e) => setDescription(e.target.value)} />
                 </Form.Group>
                 <div className="text-end">
-                    <Button variant="primary" type="submit" onClick={(e) => addTask(e)}>
+                    <Button variant="primary" type="submit" onClick={addTask}>
                         Add Task
                     </Button>
                 </div>
