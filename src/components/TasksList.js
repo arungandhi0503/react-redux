@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import UpdateModal from './UpdateTask';
 import { useSelector, useDispatch } from "react-redux";
-import { setSelectedTask } from "../slice/tasksSlice";
+import { setSelectedTask, removefromList } from "../slice/tasksSlice";
 
 const TasksList = () => {
     const dispatch = useDispatch();
@@ -18,8 +18,8 @@ const TasksList = () => {
     };
 
 
-    const deleteTask = () => {
-        console.log("delete task");
+    const deleteTask = (task) => {
+        dispatch(removefromList(task));
     };
 
     const [modalShow, setModalShow] = useState(false)
@@ -50,7 +50,7 @@ const TasksList = () => {
                                         <i className="bi bi-pencil-fill"></i>
                                     </Button>
                                     <Button variant="primary">
-                                        <i className="bi bi-trash3" onClick={() => deleteTask()}></i>
+                                        <i className="bi bi-trash3" onClick={() => deleteTask(task)}></i>
                                     </Button>
                                 </td>
                             </tr>
