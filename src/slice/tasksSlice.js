@@ -2,7 +2,7 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const initialState = {
     tasksList: [],
-    selectedList: {}
+    selectedTask: {}
 }
 
 const tasksSlice = createSlice({
@@ -32,7 +32,7 @@ const tasksSlice = createSlice({
             })
         },
         setSelectedTask: (state, action) => {
-            state.selectedList = action.payload;
+            state.selectedTask = action.payload;
         }
     }
 })
