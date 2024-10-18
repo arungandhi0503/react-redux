@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import UpdateModal from './UpdateTask';
 import { useSelector, useDispatch } from "react-redux";
-import { setSelectedTask, removefromList } from "../slice/tasksSlice";
+import { setSelectedTask, removefromList, getTaskFromServer } from "../slice/tasksSlice";
 
 const TasksList = () => {
     const dispatch = useDispatch();
@@ -16,6 +16,10 @@ const TasksList = () => {
         dispatch(setSelectedTask(task))
         setModalShow(true)
     };
+
+    useEffect(() => {
+        dispatch(getTaskFromServer());
+    }, [dispatch])
 
 
     const deleteTask = (task) => {

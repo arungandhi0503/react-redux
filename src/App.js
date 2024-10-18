@@ -2,10 +2,6 @@ import './App.css';
 import Navbar from "./components/Navbar";
 import AddTask from "./components/AddTask";
 import TasksList from "./components/TasksList";
-import { Amplify } from 'aws-amplify';
-import awsconfig from './aws-exports';
-import { withAuthenticator } from '@aws-amplify/ui-react';
-Amplify.configure(awsconfig);
 
 function App() {
   return (
@@ -21,4 +17,4 @@ function App() {
   );
 }
 
-export default withAuthenticator(App);
+export default App;

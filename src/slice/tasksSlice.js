@@ -1,9 +1,28 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { createSlice, nanoid, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
     tasksList: [],
-    selectedTask: {}
+    selectedTask: {},
+    isLoading: false,
+    error: ''
 }
+
+export const getTaskFromServer = createAsyncThunk(
+    "tasks/getTaskFromServer",
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await fetch('http://localhost:8000/tasks');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const result = await response.json();
+            return result;
+        }
+        catch (e) {
+            return rejectWithValue({ error: "" });
+        }
+    }
+)
 
 const tasksSlice = createSlice({
     name: 'tasksSlice',
@@ -34,6 +53,22 @@ const tasksSlice = createSlice({
         setSelectedTask: (state, action) => {
             state.selectedTask = action.payload;
         }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(getTaskFromServer.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(getTaskFromServer.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.error = '';
+                state.tasksList = action.payload;
+            })
+            .addCase(getTaskFromServer.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload.error;
+                state.tasksList = [];
+            })
     }
 })
 
