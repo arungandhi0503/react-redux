@@ -11,7 +11,7 @@ export const getTaskFromServer = createAsyncThunk(
     "tasks/getTaskFromServer",
     async (_, { rejectWithValue }) => {
         try {
-            const response = await fetch('http://localhost:8000/tasks');
+            const response = await fetch('http://localhost:8000/taskss');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -19,7 +19,7 @@ export const getTaskFromServer = createAsyncThunk(
             return result;
         }
         catch (e) {
-            return rejectWithValue({ error: "" });
+            return rejectWithValue({ error: "No Tasks Found" });
         }
     }
 )
